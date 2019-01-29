@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_challenge_instagram/stories.dart';
+import 'package:flutter_challenge_instagram/model/post.dart';
 
 class News extends StatelessWidget {
+  final List<Post> postList = postDataList.map((item) {
+    return Post(item[0], item[1]);
+  }).toList();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: postList.length + 1,
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
           return Stories();
+        }
+        if (index >= postList.length) {
+          return null;
         }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -24,11 +31,11 @@ class News extends StatelessWidget {
                       margin: EdgeInsets.all(6.0),
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'https://scontent-nrt1-1.cdninstagram.com/vp/130f2dad4e838eaa4c5d2248f0494e39/5CAB8BB7/t51.2885-19/s150x150/18162099_299124070517112_2766850178697658368_a.jpg'),
+                            'https://scontent-nrt1-1.cdninstagram.com/vp/b8374efc66c3051de20aa9aa297269bf/5CAAEA9A/t51.2885-19/s150x150/18580897_1193727374087893_6458706823984709632_a.jpg'),
                       ),
                     ),
                     Text(
-                      'officialtriumph',
+                      'diceku',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -40,7 +47,7 @@ class News extends StatelessWidget {
               ],
             ),
             Image.network(
-              'https://scontent-nrt1-1.cdninstagram.com/vp/55ffb23c99411595d74ef3cb6d208b19/5CB1ADBD/t51.2885-15/fr/e15/s1080x1080/44323369_344314379451202_1678689935479149464_n.jpg',
+              postList[index].image,
               fit: BoxFit.fill,
             ),
             Row(
@@ -85,7 +92,7 @@ class News extends StatelessWidget {
             Container(
               padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
               child: Text(
-                'The 1200cc Speed Twin; combining Triumph’s Street Twin modern custom style, all the comfort and timeless DNA of the',
+                'Mount Fuji located on Honshū, is the highest mountain in Japan at 3,776.24 m (12,389 ft), 2nd-highest peak of an island (volcanic) in Asia, and 7th-highest peak of an island in the world.',
                 softWrap: true,
               ),
             ),

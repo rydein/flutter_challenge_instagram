@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_challenge_instagram/model/user.dart';
 
 class Stories extends StatelessWidget {
+  final List<User> userList = userDataList.map((item) {
+    return User(item[0], item[1]);
+  }).toList();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,14 +18,14 @@ class Stories extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: userList.length,
               itemBuilder: (BuildContext context, int index) {
-                Widget alt = Text('New!!', style: TextStyle(fontSize: 12.0));
+                User user = userList[index];
+                Widget alt = Text(user.name, style: TextStyle(fontSize: 12.0));
                 List<Widget> stackList = [
                   CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(
-                        'https://scontent-nrt1-1.cdninstagram.com/vp/b8374efc66c3051de20aa9aa297269bf/5CAAEA9A/t51.2885-19/s150x150/18580897_1193727374087893_6458706823984709632_a.jpg'),
+                    backgroundImage: NetworkImage(user.avatar),
                   )
                 ];
                 if (index == 0) {
